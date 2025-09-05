@@ -1,0 +1,167 @@
+/* src/components/HamiltonSurvey.css */
+.survey-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.survey-intro {
+  background-color: #f0f9ff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border-left: 4px solid #4F46E5;
+}
+
+.survey-intro h3 {
+  color: #4F46E5;
+  margin-bottom: 15px;
+}
+
+.survey-intro p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.survey-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-section {
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.form-section h4 {
+  color: #4F46E5;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 16px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4F46E5;
+}
+
+.symptom-group {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.symptom-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: #374151;
+}
+
+.symptom-options {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 50px;
+  text-align: center;
+}
+
+.option-label:hover {
+  border-color: #4F46E5;
+  background-color: #f5f3ff;
+}
+
+.option-label input[type="radio"] {
+  margin-bottom: 5px;
+}
+
+.option-label input[type="radio"]:checked + span {
+  font-weight: bold;
+  color: #4F46E5;
+}
+
+.submit-button {
+  padding: 15px 30px;
+  background-color: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #3730A3;
+}
+
+.submit-button:disabled {
+  background-color: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.success-message {
+  background-color: #10B981;
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.success-message h3 {
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .symptom-options {
+    justify-content: flex-start;
+  }
+  
+  .option-label {
+    min-width: 40px;
+    padding: 8px;
+  }
+}
