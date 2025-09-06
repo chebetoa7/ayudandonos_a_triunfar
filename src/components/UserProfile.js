@@ -1,10 +1,11 @@
 // src/components/UserProfile.js
 import React, { useState, useEffect } from 'react';
-import { ref, set, onValue } from 'firebase/database';
+import { ref, set, onValue, push } from 'firebase/database';
 import './UserProfile.css';
 
 const UserProfile = ({ db }) => {
-  const [userData, setUserData] = useState({
+  // Estado para los datos del formulario
+  const [formData, setFormData] = useState({
     nombre: '',
     entidad: '',
     sexo: '',
@@ -14,38 +15,76 @@ const UserProfile = ({ db }) => {
     email: '',
     turno: '',
     telefono: '',
-    institucion: ''
+    institucion: '',
+    curp: ''
   });
 
+  const [userId, setUserId] = useState('');
   const [isSaved, setIsSaved] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // Cargar datos del perfil si existen
+  // Cargar perfil del usuario
   useEffect(() => {
-    const userRef = ref(db, 'user_profile');
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setUserData(data);
+    const loadUserProfile = async () => {
+      try {
+        let storedUserId = localStorage.getItem('user_id');
+        
+        if (!storedUserId) {
+          // Crear nuevo ID de usuario si no existe
+          const newUserRef = push(ref(db, 'user_profile'));
+          storedUserId = newUserRef.key;
+          localStorage.setItem('user_id', storedUserId);
+        }
+        
+        setUserId(storedUserId);
+        
+        // Cargar datos existentes del usuario
+        const userRef = ref(db, `user_profile/${storedUserId}`);
+        onValue(userRef, (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            setFormData(data);
+          }
+          setLoading(false);
+        }, (error) => {
+          console.error('Error loading user data:', error);
+          setLoading(false);
+        });
+        
+      } catch (error) {
+        console.error('Error setting up user profile:', error);
+        setLoading(false);
       }
-    });
+    };
+
+    loadUserProfile();
   }, [db]);
 
-  const handleChange = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value
-    });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    if (!userId) {
+      alert('Error: No se pudo identificar tu usuario. Por favor, recarga la página.');
+      return;
+    }
+
     try {
-      const userRef = ref(db, 'user_profile');
-      await set(userRef, userData);
-      setIsSaved(true);
+      const userRef = ref(db, `user_profile/${userId}`);
+      await set(userRef, {
+        ...formData,
+        userId: userId,
+        lastUpdated: new Date().toISOString()
+      });
       
-      // Ocultar mensaje de éxito después de 3 segundos
+      setIsSaved(true);
       setTimeout(() => setIsSaved(false), 3000);
     } catch (error) {
       console.error('Error al guardar el perfil:', error);
@@ -60,6 +99,16 @@ const UserProfile = ({ db }) => {
     "TSUM",
     "Otra"
   ];
+
+  if (loading) {
+    return (
+      <div className="profile-container">
+        <div className="container">
+          <div className="loading">Cargando perfil...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="profile-container">
@@ -84,8 +133,8 @@ const UserProfile = ({ db }) => {
                   type="text"
                   id="nombre"
                   name="nombre"
-                  value={userData.nombre}
-                  onChange={handleChange}
+                  value={formData.nombre}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -96,8 +145,8 @@ const UserProfile = ({ db }) => {
                   type="number"
                   id="edad"
                   name="edad"
-                  value={userData.edad}
-                  onChange={handleChange}
+                  value={formData.edad}
+                  onChange={handleInputChange}
                   min="16"
                   max="60"
                   required
@@ -111,8 +160,8 @@ const UserProfile = ({ db }) => {
                 <select
                   id="sexo"
                   name="sexo"
-                  value={userData.sexo}
-                  onChange={handleChange}
+                  value={formData.sexo}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Seleccione...</option>
@@ -128,11 +177,27 @@ const UserProfile = ({ db }) => {
                   type="text"
                   id="entidad"
                   name="entidad"
-                  value={userData.entidad}
-                  onChange={handleChange}
+                  value={formData.entidad}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="curp">CURP *</label>
+              <input
+                type="text"
+                id="curp"
+                name="curp"
+                value={formData.curp}
+                onChange={handleInputChange}
+                required
+                pattern="[A-Z0-9]{18}"
+                title="Ingresa tu CURP (18 caracteres alfanuméricos)"
+                maxLength="18"
+                placeholder="ABCD123456EFGHIJ78"
+              />
             </div>
           </div>
 
@@ -140,13 +205,14 @@ const UserProfile = ({ db }) => {
             <h3>Información Académica</h3>
             
             <div className="form-group">
-              <label htmlFor="institucion">Institución Educativa</label>
+              <label htmlFor="institucion">Institución Educativa *</label>
               <input
                 type="text"
                 id="institucion"
                 name="institucion"
-                value={userData.institucion}
-                onChange={handleChange}
+                value={formData.institucion}
+                onChange={handleInputChange}
+                required
                 placeholder="Nombre de tu institución"
               />
             </div>
@@ -157,8 +223,8 @@ const UserProfile = ({ db }) => {
                 <select
                   id="programa"
                   name="programa"
-                  value={userData.programa}
-                  onChange={handleChange}
+                  value={formData.programa}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Seleccione...</option>
@@ -174,8 +240,8 @@ const UserProfile = ({ db }) => {
                   type="number"
                   id="semestre"
                   name="semestre"
-                  value={userData.semestre}
-                  onChange={handleChange}
+                  value={formData.semestre}
+                  onChange={handleInputChange}
                   min="1"
                   max="12"
                   required
@@ -189,8 +255,8 @@ const UserProfile = ({ db }) => {
                 <select
                   id="turno"
                   name="turno"
-                  value={userData.turno}
-                  onChange={handleChange}
+                  value={formData.turno}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Seleccione...</option>
@@ -206,8 +272,8 @@ const UserProfile = ({ db }) => {
                   type="tel"
                   id="telefono"
                   name="telefono"
-                  value={userData.telefono}
-                  onChange={handleChange}
+                  value={formData.telefono}
+                  onChange={handleInputChange}
                   placeholder="+52 123 456 7890"
                 />
               </div>
@@ -223,8 +289,8 @@ const UserProfile = ({ db }) => {
                 type="email"
                 id="email"
                 name="email"
-                value={userData.email}
-                onChange={handleChange}
+                value={formData.email}
+                onChange={handleInputChange}
                 required
                 placeholder="usuario@ejemplo.com"
               />

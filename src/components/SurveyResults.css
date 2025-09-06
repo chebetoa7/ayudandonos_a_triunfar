@@ -1,0 +1,116 @@
+/* src/components/SurveyResults.css */
+.survey-results {
+  margin-top: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  color: white;
+}
+
+.survey-results h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+.score-section {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.score-section h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.score-interpretation {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.recommendations-section,
+.professionals-section,
+.hospitals-section,
+.emergency-contacts {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.recommendations-section h4,
+.professionals-section h4,
+.hospitals-section h4,
+.emergency-contacts h4 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 10px;
+}
+
+.recommendations-content ul {
+  text-align: left;
+  margin: 15px 0;
+}
+
+.recommendations-content li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.professionals-grid,
+.hospitals-grid,
+.emergency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.professional-card,
+.hospital-card,
+.emergency-card {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.professional-card h5,
+.hospital-card h5,
+.emergency-card h5 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.professional-card p,
+.hospital-card p,
+.emergency-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.loading-resources {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .professionals-grid,
+  .hospitals-grid,
+  .emergency-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .survey-results {
+    padding: 15px;
+  }
+}

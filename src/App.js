@@ -8,8 +8,10 @@ import Footer from './components/Footer';
 import SurveyMenu from './components/SurveyMenu';
 import HamiltonSurvey from './components/HamiltonSurvey';
 import EMASurvey from './components/EMASurvey';
+import ViolentometerSurvey from './components/ViolentometerSurvey'; 
 import UserProfile from './components/UserProfile';
 import { database } from './config/firebase';
+import { populateResources } from './utils/populateResources';
 import './App.css';
 
 // Página de inicio
@@ -49,6 +51,7 @@ function App() {
           <Route path="/perfil" element={<UserProfile db={database} />} />
           <Route path="/encuesta/hamilton" element={<HamiltonSurvey db={database} />} />
           <Route path="/encuesta/ema" element={<EMASurvey db={database} />} />
+          <Route path="/encuesta/violentometro" element={<ViolentometerSurvey db={database} />} />
         </Routes>
         <Footer />
       </Router>

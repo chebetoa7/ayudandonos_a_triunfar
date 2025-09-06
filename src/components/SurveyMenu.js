@@ -18,6 +18,13 @@ const SurveyMenu = () => {
       description: 'Escalas Magallanes de Detección de Déficit de Atención (4-12 años)',
       icon: '👨‍🏫',
       time: '20 min'
+    },
+    {
+      id: 'violentometro',
+      title: 'Violentómetro',
+      description: 'Evaluación de situaciones de violencia y su impacto emocional/físico',
+      icon: '⚠️',
+      time: '25 min'
     }
   ];
 

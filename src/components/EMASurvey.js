@@ -6,19 +6,24 @@ import './EMASurvey.css';
 const EMASurvey = ({ db }) => {
   const [formData, setFormData] = useState({});
   const [userProfile, setUserProfile] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Cargar perfil del usuario
   useEffect(() => {
-    const userRef = ref(db, 'user_profile');
+  const storedUserId = localStorage.getItem('user_id');
+  if (storedUserId) {
+    setUserId(storedUserId);
+    const userRef = ref(db, `user_profile/${storedUserId}`);
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
         setUserProfile(data);
       }
     });
-  }, [db]);
+  }
+}, [db]);
 
   const handleChange = (e) => {
     setFormData({
@@ -35,9 +40,10 @@ const EMASurvey = ({ db }) => {
       const surveyRef = ref(db, 'ema_surveys');
       await push(surveyRef, {
         ...formData,
+        userId: userId, // Vincular con el ID del usuario
         userInfo: userProfile,
         timestamp: new Date().toISOString(),
-        surveyType: 'EMA-D.D.A. Maestros'
+        surveyType: 'EMA-D.D.A.'
       });
 
       setIsSubmitted(true);
@@ -76,7 +82,7 @@ const EMASurvey = ({ db }) => {
         "Parece estar 'enfrascado/a en sus pensamientos' [pensativo/a, en las nubes]",
         "Es despistado/a, tarda en darse cuenta lo que ocurre alrededor",
         "Se mueve y hace las cosas lentamente, como si le faltara energía",
-        "Se muestra descuidado/a, indiferente, sin interés por las cosas",
+        "Se muestra descuidado/a, indiferente, sans interés por las cosas",
         "Es lento/a para hacer sus actividades en el salón de clases",
         "Tarda en comprender cuando se le explica algo",
         "Le cuesta darse cuenta de los detalles importantes de las cosas o situaciones"
@@ -172,6 +178,12 @@ const EMASurvey = ({ db }) => {
           Este cuestionario consta de una lista de comportamientos que presenta el alumno en la escuela.
           Léalo con atención e indique con qué frecuencia ocurren las siguientes situaciones.
         </p>
+        
+        {userProfile && (
+          <div className="user-info">
+            <p><strong>Evaluador:</strong> {userProfile.nombre}</p>
+          </div>
+        )}
       </div>
 
       <form onSubmit={handleSubmit} className="survey-form">
