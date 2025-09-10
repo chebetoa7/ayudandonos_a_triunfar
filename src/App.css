@@ -60,7 +60,7 @@ body {
 .btn {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #4F46E5;
+  background-color: #e63946;
   color: white;
   border: none;
   border-radius: 6px;
@@ -72,18 +72,18 @@ body {
 }
 
 .btn:hover {
-  background-color: #3730A3;
+  background-color: #c1121f;
   transform: translateY(-2px);
 }
 
 .btn-secondary {
   background-color: white;
-  color: #4F46E5;
-  border: 2px solid #4F46E5;
+  color: #e63946;
+  border: 2px solid #c1121f;
 }
 
 .btn-secondary:hover {
-  background-color: #4F46E5;
+  background-color: #c1121f;
   color: white;
 }
 
@@ -99,7 +99,7 @@ section {
 .contact-section h2 {
   font-size: 36px;
   margin-bottom: 20px;
-  color: #4F46E5;
+  color: #f8c537;
 }
 
 .contact-section p {
@@ -116,7 +116,7 @@ section {
 .survey-section h2 {
   font-size: 36px;
   margin-bottom: 20px;
-  color: #4F46E5;
+  color: #f8c537;
 }
 
 .survey-section p {

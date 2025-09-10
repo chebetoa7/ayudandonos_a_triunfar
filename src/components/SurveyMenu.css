@@ -30,7 +30,7 @@
 }
 
 .survey-card h3 {
-  color: #4F46E5;
+  color: #2c5aa0;
   margin-bottom: 15px;
   font-size: 22px;
 }
@@ -58,16 +58,16 @@
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-  border-left: 4px solid #3B82F6;
+  border-left: 4px solid #2c5aa0;
 }
 
 .survey-info p {
   margin: 0;
-  color: #1E40AF;
+  color: #2c5aa0;
 }
 
 .survey-info a {
-  color: #3B82F6;
+  color: #2c5aa0;
   text-decoration: underline;
   font-weight: 500;
 }

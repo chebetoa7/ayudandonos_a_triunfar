@@ -1,0 +1,87 @@
+PROYECTO: Ayudándoles a Triunfar A.C.
+REPOSITORIO: https://github.com/chebetoa7/ayudandonos_a_triunfar
+
+COLORES_PRINCIPALES:
+- Primario: #2c5aa0 (azul)
+- Secundario: #f8c537 (amarillo) 
+- Acento: #e63946 (rojo)
+- Blanco: #ffffff
+- Texto: #333333
+
+SEDES:
+- Tamaulipas (default) - 3 encuestas
+- Tabasco - 3 encuestas (por implementar)
+
+TECNOLOGÍAS:
+- React
+- React Router
+- Firebase (base de datos real)
+- CSS modules
+
+ESTRUCTURA_PRINCIPAL:
+- App.js & App.css
+- Index.js & Index.css
+- config/firebase.js
+
+ENCUESTAS_TAMAULIPAS:
+1. EMASurvey.js & EMASurvey.css
+2. HamiltonSurvey.js & HamiltonSurvey.css  
+3. ViolentometerSurvey.js & ViolentometerSurvey.css
+
+ENCUESTAS_TABASCO:
+1. Por implementar (3 encuestas)
+2. Por implementar
+3. Por implementar
+
+COMPONENTES_PAGES:
+- SurveyMenu.js & SurveyMenu.css (menú de selección de encuestas)
+- SurveyResults.js & SurveyResults.css (resultados de encuestas)
+- UserProfile.js & UserProfile.css (registro usuario → Firebase)
+- ContactForm.js (sin CSS)
+
+COMPONENTES_NAVEGACIÓN:
+- Header.js & Header.css (con selector de sedes)
+
+FUNCIONALIDADES_ACTIVAS:
+- Selector de sedes Tamaulipas/Tabasco en Header
+- Sistema de 3 encuestas para Tamaulipas
+- Menú de navegación entre encuestas
+- Registro de usuarios en Firebase
+- Formulario de contacto
+- Página de resultados de encuestas
+
+FUNCIONALIDADES_PENDIENTES:
+- Implementar 3 encuestas para Tabasco
+- Integrar sedes con datos específicos
+- Conectar encuestas con Firebase por sede
+- Diferenciar resultados por sede
+
+ÚLTIMOS_CAMBIOS:
+- Implementado selector de sedes en Header
+- Configuración Firebase completa
+- 3 encuestas implementadas para Tamaulipas
+
+PRÓXIMOS_PASOS:
+- [ ] Implementar 3 encuestas para Tabasco
+- [ ] Conectar encuestas con Firebase por sede
+- [ ] Diferenciar visualización por sede
+- [ ] Mejorar responsive design
+- [ ] Agregar autenticación de usuarios
+
+ESTURCTURA_DB_FIREBASE_PARA_RESULTADOS
+- resources/
+  ├── hospitals/
+  │    ├── hospital1: {nombre, direccion, telefono, especialidad, ubicacion}
+  │    └── hospital2: {...}
+  ├── professionals/
+  │    ├── prof1: {nombre, especialidad, contacto, tipo}
+  │    └── prof2: {...}
+  └── recommendations/
+       ├── by_score/
+       │    ├── hamilton_0_10: "Recomendaciones para puntaje bajo"
+       │    ├── hamilton_11_20: "Recomendaciones para puntaje medio"
+       │    └── hamilton_21_50: "Recomendaciones para puntaje alto"
+       └── by_topic/
+            ├── anxiety: "Recursos para ansiedad"
+            ├── depression: "Recursos para depresión"
+            └── violence: "Recursos para violencia"

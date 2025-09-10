@@ -29,7 +29,7 @@ const FeatureCard = styled.div`
   .icon {
     font-size: 48px;
     margin-bottom: 20px;
-    color: #4F46E5;
+    color: #f8c537;
   }
 
   h3 {

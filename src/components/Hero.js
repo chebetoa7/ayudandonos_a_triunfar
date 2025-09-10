@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import './Hero.css';
 
 const HeroSection = styled.section`
-  background: linear-gradient(135deg, #4F46E5 0%, #7E22CE 100%);
+  background: linear-gradient(135deg, #2c5aa0 0%, #7E22CE 100%);
   color: white;
   padding: 100px 0;
   text-align: center;

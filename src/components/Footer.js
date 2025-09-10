@@ -18,7 +18,7 @@ const FooterContainer = styled.footer`
     h3 {
       font-size: 20px;
       margin-bottom: 20px;
-      color: #4F46E5;
+      color: #e63946;
     }
 
     p, li {
@@ -36,7 +36,7 @@ const FooterContainer = styled.footer`
       transition: color 0.3s;
 
       &:hover {
-        color: #4F46E5;
+        color: #f8c537;
       }
     }
   }

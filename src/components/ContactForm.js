@@ -37,7 +37,7 @@ const FormGroup = styled.div`
 
     &:focus {
       outline: none;
-      border-color: #4F46E5;
+      border-color: #2c5aa0;
     }
   }
 
@@ -49,7 +49,7 @@ const FormGroup = styled.div`
 
 const SubmitButton = styled.button`
   padding: 12px 24px;
-  background-color: #4F46E5;
+  background-color: #2c5aa0;
   color: white;
   border: none;
   border-radius: 6px;
@@ -59,7 +59,7 @@ const SubmitButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #3730A3;
+    background-color: #2c5aa0;
   }
 
   &:disabled {
