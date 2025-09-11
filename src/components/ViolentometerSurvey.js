@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ref, push, onValue } from 'firebase/database';
 import './ViolentometerSurvey.css';
 
-const ViolentometerSurvey = ({ db }) => {
+const ViolentometerSurvey = ({ db , sede }) => {
   const [formData, setFormData] = useState({
     supervision: '',
     jefaturaSector: '',
@@ -44,10 +44,9 @@ const ViolentometerSurvey = ({ db }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validar que el perfil esté completo para esta encuesta
     if (!userProfile || !userProfile.curp) {
       alert('Para esta encuesta, necesitas completar tu perfil con tu CURP primero.');
       return;
@@ -56,23 +55,19 @@ const ViolentometerSurvey = ({ db }) => {
     setIsSubmitting(true);
 
     try {
-      const surveyRef = ref(db, 'violentometro_surveys');
+      // CAMBIA ESTA LÍNEA
+      const surveyRef = ref(db, `sedes/${sede}/Encuestas/violentometro`);
       await push(surveyRef, {
-        // Información del perfil
         curp: userProfile.curp,
         escuela: userProfile.institucion,
         turno: userProfile.turno,
-        // Información específica de esta encuesta
         supervision: formData.supervision,
         jefaturaSector: formData.jefaturaSector,
-        // Respuestas de la encuesta
         ...formData,
-        // Información del usuario
         userId: userId,
         userInfo: userProfile,
         timestamp: new Date().toISOString(),
         surveyType: 'Violentómetro',
-        // Calcular promedios
         promedioEmocional: calculateAverage('emocional'),
         promedioFisico: calculateAverage('fisico')
       });

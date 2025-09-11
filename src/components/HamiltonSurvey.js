@@ -4,7 +4,7 @@ import { ref, push, onValue } from 'firebase/database';
 import SurveyResults from './SurveyResults';
 import './HamiltonSurvey.css';
 
-const HamiltonSurvey = ({ db }) => {
+const HamiltonSurvey = ({ db, sede }) => {
   const [formData, setFormData] = useState({
     sintoma1: '0', sintoma2: '0', sintoma3: '0', sintoma4: '0', sintoma5: '0',
     sintoma6: '0', sintoma7: '0', sintoma8: '0', sintoma9: '0', sintoma10: '0',
@@ -43,10 +43,11 @@ useEffect(() => {
     setIsSubmitting(true);
 
     try {
-      const surveyRef = ref(db, 'hamilton_surveys');
+      // CAMBIA ESTA LÍNEA - Referencia específica por sede
+      const surveyRef = ref(db, `sedes/${sede}/Encuestas/hamilton`);
       await push(surveyRef, {
         ...formData,
-        userId: userId, // Vincular con el ID del usuario
+        userId: userId,
         userInfo: userProfile,
         timestamp: new Date().toISOString(),
         totalScore: calculateTotalScore(),
@@ -109,7 +110,7 @@ useEffect(() => {
   return (
     <div className="survey-container">
       <div className="survey-intro">
-        <h3>Ansiedad-Hamilton</h3>
+        <h3>Ansiedad-Hamilton - {sede}</h3>
         <p>
           Estimado/a estudiante,<br/>
           Agradecemos su participación en esta encuesta. Su colaboración es fundamental para entender mejor este tema. 

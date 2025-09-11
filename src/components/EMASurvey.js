@@ -1,5 +1,5 @@
 // src/components/EMASurvey.js
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 import { ref, push, onValue } from 'firebase/database';
 import './EMASurvey.css';
 
@@ -220,6 +220,138 @@ const EMASurvey = ({ db }) => {
 
         <button type="submit" className="submit-button" disabled={isSubmitting}>
           {isSubmitting ? 'Enviando...' : 'Enviar Encuesta EMA'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default EMASurvey;*/
+
+// src/components/EMASurvey.js
+import React, { useState, useEffect } from 'react';
+import { ref, push, onValue } from 'firebase/database';
+import './EMASurvey.css';
+
+const EMASurvey = ({ db, sede }) => {  // ← Añadí el prop 'sede'
+  const [formData, setFormData] = useState({});
+  const [userProfile, setUserProfile] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Cargar perfil del usuario
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('user_id');
+    if (storedUserId) {
+      setUserId(storedUserId);
+      const userRef = ref(db, `user_profile/${storedUserId}`);
+      onValue(userRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setUserProfile(data);
+        }
+      });
+    }
+  }, [db]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // CAMBIA ESTA LÍNEA
+      const surveyRef = ref(db, `sedes/${sede}/Encuestas/ema`);
+      await push(surveyRef, {
+        ...formData,
+        userId: userId,
+        userInfo: userProfile,
+        timestamp: new Date().toISOString(),
+        surveyType: 'EMA-D.D.A.'
+      });
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error al enviar la encuesta:', error);
+      alert('Hubo un error al enviar tu encuesta. Por favor, intenta nuevamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Preguntas de la encuesta EMA (se mantienen igual)
+  const sections = [
+    {
+      title: "Comportamientos de Hiperactividad/Impulsividad",
+      questions: [
+        "Está moviéndose de un lado para otro: nunca está quieto/a",
+        "Cuando está sentado/a, se mueve mucho en su pupitre",
+        "Habla mucho",
+        "Cualquier cosa lo distrae",
+        "Le cuesta concentrarse en cualquier actividad",
+        "Cuando le habla, escucha, pero no hace caso",
+        "No termina sus actividades, las abandona y busca otra",
+        "Es brusco, se tropieza y golpea a menudo",
+        "Si le preguntan algo, responde inmediatamente, sin pensar",
+        "Interrumpe cuando alguien está haciendo algo o cuando están hablando",
+        "Le cuesta trabajo realizar actividades que requieran pensar, reflexionar",
+        "Si quiere algo, intenta conseguirlo de manera inmediata",
+        "Hace cosas sin pensar en las consecuencias",
+        "No tiene paciencia, es incapaz de esperar"
+      ]
+    },
+    // ... (las demás secciones se mantienen igual)
+  ];
+
+  const options = [
+    { value: 'CN', label: 'CN: Nunca o casi nunca' },
+    { value: 'PV', label: 'PV: Pocas veces' },
+    { value: 'AM', label: 'AM: A menudo' },
+    { value: 'CS', label: 'CS: Casi siempre' }
+  ];
+
+  if (isSubmitted) {
+    return (
+      <div className="survey-container">
+        <div className="success-message">
+          <h3>¡Encuesta EMA completada!</h3>
+          <p>Gracias por tu participación en la evaluación de déficit de atención.</p>
+          <p><strong>Sede:</strong> {sede}</p>  {/* ← Muestra la sede */}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="survey-container">
+      <div className="survey-intro">
+        <h3>EMA-D.D.A. (Maestros) - {sede}</h3>  {/* ← Muestra la sede */}
+        <p>Escalas Magallanes de Detección de Déficit de Atención (4-12 años)</p>
+        <p>
+          Este cuestionario consta de una lista de comportamientos que presenta el alumno en la escuela.
+          Léalo con atención e indique con qué frecuencia ocurren las siguientes situaciones.
+        </p>
+        
+        {userProfile && (
+          <div className="user-info">
+            <p><strong>Evaluador:</strong> {userProfile.nombre}</p>
+            <p><strong>Sede:</strong> {sede}</p>  {/* ← Muestra la sede */}
+          </div>
+        )}
+      </div>
+
+      <form onSubmit={handleSubmit} className="survey-form">
+        {/* ... (el resto del formulario se mantiene igual) */}
+        
+        <button type="submit" className="submit-button" disabled={isSubmitting}>
+          {isSubmitting ? 'Enviando...' : `Enviar Encuesta EMA - ${sede}`}  {/* ← Muestra la sede */}
         </button>
       </form>
     </div>

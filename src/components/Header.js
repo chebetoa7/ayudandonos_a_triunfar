@@ -7,11 +7,20 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSede, setSelectedSede] = useState('Tamaulipas');
   
-  const handleSedeChange = (sede) => {
+  /*const handleSedeChange = (sede) => {
     setSelectedSede(sede);
     // Aquí puedes agregar lógica para cambiar el contenido según la sede seleccionada
     console.log(`Sede cambiada a: ${sede}`);
-  };
+  };*/
+  const handleSedeChange = (sede) => {
+  setSelectedSede(sede);
+  localStorage.setItem('selectedSede', sede);
+  
+  // Disparar evento storage para notificar a otros componentes
+  window.dispatchEvent(new Event('storage'));
+  
+  console.log(`Sede cambiada a: ${sede}`);
+};
 
   return (
     <header className="header">
