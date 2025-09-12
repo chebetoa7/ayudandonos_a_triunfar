@@ -1,84 +1,49 @@
 // src/components/Footer.js
 import React from 'react';
-import styled from 'styled-components';
-
-const FooterContainer = styled.footer`
-  background-color: #1F2937;
-  color: white;
-  padding: 60px 0 30px;
-
-  .footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-
-  .footer-section {
-    h3 {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #e63946;
-    }
-
-    p, li {
-      color: #D1D5DB;
-      margin-bottom: 10px;
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    a {
-      color: #D1D5DB;
-      text-decoration: none;
-      transition: color 0.3s;
-
-      &:hover {
-        color: #f8c537;
-      }
-    }
-  }
-
-  .footer-bottom {
-    text-align: center;
-    padding-top: 30px;
-    border-top: 1px solid #374151;
-    color: #9CA3AF;
-  }
-`;
+import { Link } from 'react-router-dom'; // ← Asegúrate que esta importación esté
+import './Footer.css';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <FooterContainer>
+    <footer className="footer">
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>Ayudándoles a Triunfar</h3>
-            <p>Tu plataforma de apoyo para alcanzar el éxito personal y profesional.</p>
+            <h4>Ayudándoles a Triunfar A.C.</h4>
+            <p>Transformando vidas a través de la salud mental y educación</p>
           </div>
+
           <div className="footer-section">
-            <h3>Enlaces Rápidos</h3>
+            <h4>Enlaces Rápidos</h4>
             <ul>
-              <li><a href="#features">Servicios</a></li>
-              <li><a href="/contacto">Contacto</a></li>
-              <li><a href="#privacy">Política de Privacidad</a></li>
-              <li><a href="#terms">Términos de Servicio</a></li>
+              <li><Link to="/">Inicio</Link></li>
+              <li><Link to="/quienes-somos">Quiénes Somos</Link></li>
+              <li><Link to="/encuestas">Encuestas</Link></li>
+              <li><Link to="/perfil">Mi Perfil</Link></li>
             </ul>
           </div>
+
           <div className="footer-section">
-            <h3>Contacto</h3>
-            <p>Email: info@ayudandolesatriunfar.com</p>
-            <p>Teléfono: +1 (123) 456-7890</p>
-            <p>Dirección: Calle Ejemplo 123, Ciudad</p>
+            <h4>Contacto</h4>
+            <p>contacto@ayudandolesatriunfar.org</p>
+            <p>(834) 123-4567</p>
+          </div>
+
+          <div className="footer-section">
+            <h4>Legal</h4>
+            <Link to="/aviso-privacidad" className="privacy-link">
+              Aviso de Privacidad
+            </Link>
           </div>
         </div>
+
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Ayudándoles a Triunfar. Todos los derechos reservados.</p>
+          <p>&copy; {currentYear} Ayudándoles a Triunfar A.C. - Todos los derechos reservados</p>
         </div>
       </div>
-    </FooterContainer>
+    </footer>
   );
 };
 

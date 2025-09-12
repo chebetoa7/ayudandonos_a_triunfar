@@ -1,108 +1,227 @@
-PROYECTO: Ayudándoles a Triunfar A.C.
+PROYECTO: Ayudándoles a Triunfar A.C. (ATAC)
 REPOSITORIO: https://github.com/chebetoa7/ayudandonos_a_triunfar
 
+INFORMACIÓN_INSTITUCIONAL:
+- Nombre: Ayudándoles a Triunfar A.C. (ATAC)
+- Fundación: 19 de mayo de 2005
+- Fundadora: Neri Marivel Cañas Aguilar
+- Naturaleza: Altruista, asistencial y de desarrollo social
+- Fines: Sin fines de lucro
+- Carácter: Permanente
+
 COLORES_PRINCIPALES:
-- Primario: #2c5aa0 (azul)
+- Primario: #2c5aa0 (azul institucional)
 - Secundario: #f8c537 (amarillo) 
 - Acento: #e63946 (rojo)
 - Blanco: #ffffff
 - Texto: #333333
 
-SEDES:
-- Tamaulipas (default) - 3 encuestas
-- Tabasco - 3 encuestas (por implementar)
+GOBIERNO_Y_COLABORADORES:
+- Presidenta: Neri Marivel Cañas Aguilar
+- Suplente Tamaulipas: Glady Edith Cañas Aguilar
+- Aliado Institucional: Ever J. Ruiz
+- Personal: Voluntarios comprometidos
+
+ESTRUCTURA_PROYECTO:
+src/
+├── components/
+│   ├── Header.js & Header.css
+│   ├── Hero.js & Hero.css
+│   ├── Features.js & Features.css
+│   ├── Footer.js & Footer.css
+│   ├── SurveyMenu.js & SurveyMenu.css
+│   ├── QuienesSomos.js & QuienesSomos.css
+│   ├── AvisoPrivacidad.js & AvisoPrivacidad.css
+│   ├── UserProfile.js & UserProfile.css
+│   ├── HamiltonSurvey.js & HamiltonSurvey.css
+│   ├── EMASurvey.js & EMASurvey.css
+│   ├── ViolentometerSurvey.js & ViolentometerSurvey.css
+│   └── SocioeconomicoSurvey.js & SocioeconomicoSurvey.css
+├── config/
+│   └── firebase.js
+├── App.js & App.css
+└── index.js & index.css
+
+ESTRUCTURA_FIREBASE:
+- users/
+│   └── user_id/
+│       ├── nombre: "string"
+│       ├── email: "string"
+│       ├── telefono: "string"
+│       ├── institucion: "string"
+│       ├── turno: "string"
+│       ├── curp: "string"
+│       ├── entidad: "string"
+│       └── timestamp: "ISO_string"
+│
+- sedes/
+│   ├── tamaulipas/
+│   │   └── Encuestas/
+│   │       ├── 0: "Hamilton"
+│   │       ├── 1: "EMA"
+│   │       ├── 2: "Violentómetro"
+│   │       └── 3: "Socioeconómico"
+│   │
+│   └── tabasco/
+│       └── Encuestas/
+│           ├── 0: "Socioeconómico"
+│           ├── 1: "EMA"
+│           ├── 2: "Hamilton"
+│           └── 3: "Violentómetro"
+│
+- hamilton_surveys/
+│   └── survey_id/
+│       ├── userId: "user_id"
+│       ├── userInfo: {object}
+│       ├── sede: "string"
+│       ├── sintoma1: "value"
+│       ├── ...sintoma14: "value"
+│       ├── totalScore: number
+│       ├── surveyType: "Hamilton"
+│       └── timestamp: "ISO_string"
+│
+- ema_surveys/
+│   └── survey_id/
+│       ├── userId: "user_id"
+│       ├── userInfo: {object}
+│       ├── sede: "string"
+│       ├── respuestas: {object}
+│       ├── surveyType: "EMA-D.D.A."
+│       └── timestamp: "ISO_string"
+│
+- violentometro_surveys/
+│   └── survey_id/
+│       ├── userId: "user_id"
+│       ├── userInfo: {object}
+│       ├── sede: "string"
+│       ├── curp: "string"
+│       ├── escuela: "string"
+│       ├── turno: "string"
+│       ├── supervision: "string"
+│       ├── jefaturaSector: "string"
+│       ├── respuestas_emocional: {object}
+│       ├── respuestas_fisico: {object}
+│       ├── promedioEmocional: number
+│       ├── promedioFisico: number
+│       ├── surveyType: "Violentómetro"
+│       └── timestamp: "ISO_string"
+│
+- socioeconomico_surveys/
+│   └── survey_id/
+│       ├── userId: "user_id"
+│       ├── userInfo: {object}
+│       ├── sede: "string"
+│       ├── datos_escuela: {object}
+│       ├── datos_alumno: {object}
+│       ├── datos_familiares: {object}
+│       ├── datos_vivienda: {object}
+│       ├── surveyType: "Cuestionario Socioeconómico"
+│       └── timestamp: "ISO_string"
+│
+- resources/
+│   ├── hospitals/
+│   │   └── hospital_id/
+│   │       ├── nombre: "string"
+│   │       ├── direccion: "string"
+│   │       ├── telefono: "string"
+│   │       ├── especialidad: "string"
+│   │       └── ubicacion: {lat, lng}
+│   │
+│   ├── professionals/
+│   │   └── professional_id/
+│   │       ├── nombre: "string"
+│   │       ├── especialidad: "string"
+│   │       ├── contacto: "string"
+│   │       ├── tipo: "string"
+│   │       └── sede: "string"
+│   │
+│   └── recommendations/
+│       ├── by_score/
+│       │   ├── hamilton_0_10: "Recomendaciones para puntaje bajo"
+│       │   ├── hamilton_11_20: "Recomendaciones para puntaje medio"
+│       │   └── hamilton_21_50: "Recomendaciones para puntaje alto"
+│       │
+│       └── by_topic/
+│           ├── anxiety: "Recursos para ansiedad"
+│           ├── depression: "Recursos para depresión"
+│           └── violence: "Recursos para violencia"
+
+SISTEMA_ENCUESTAS:
+- Arquitectura: Modular y escalable
+- Gestión: Encuestas se asignan en Firebase por sede
+- Flexibilidad: Nuevas encuestas se agregan en Firebase y se detectan automáticamente
+- Configuración: Cada sede tiene su propio set de encuestas activas
+
+ENCUESTAS_ACTUALES:
+1. HamiltonSurvey: Escala de Ansiedad Hamilton (15 min)
+2. EMASurvey: Escalas Magallanes de Déficit de Atención (20 min)
+3. ViolentometerSurvey: Evaluación de violencia escolar (15 min)
+4. SocioeconomicoSurvey: Cuestionario socioeconómico familiar (10 min)
+
+CONFIGURACIÓN_SEDES:
+- tamaulipas: 4 encuestas activas (Hamilton, EMA, Violentómetro, Socioeconómico)
+- tabasco: 4 encuestas activas (Socioeconómico, EMA, Hamilton, Violentómetro)
+
+POBLACIÓN_OBJETIVO:
+- Población infantojuvenil escolarmente vulnerable
+- Familias en situación de riesgo
+- Grupos vulnerables y marginados
+- Población migrante
+- Sectores de escasos recursos económicos
+
+SERVICIOS_PRINCIPALES:
+- Evaluaciones sociopsicopedagógicas
+- Detección temprana de problemas psicológicos
+- Prevención e intervención de violencia
+- Apoyo socioeconómico familiar
+- Acompañamiento psicológico
+
+VALORES_INSTITUCIONALES:
+- Dignidad: Respeto a la persona
+- Justicia: Equidad e igualdad  
+- Integridad: Coherencia y honestidad
+- Caridad: Amor al prójimo
+- Libertad: Autonomía y derechos
+
+MISIÓN:
+Trabajar con familias, población infantojuvenil escolarmente vulnerable y población 
+en estado de vulnerabilidad, a través de actividades de asistencia y desarrollo social.
+
+VISIÓN:
+Ser reconocida como la mejor opción para la atención a población infantojuvenil 
+escolarmente vulnerable y población migrante.
 
 TECNOLOGÍAS:
-- React
-- React Router
-- Firebase (base de datos real)
-- CSS modules
-
-ESTRUCTURA_PRINCIPAL:
-- App.js & App.css
-- Index.js & Index.css
-- config/firebase.js
-
-ENCUESTAS_TAMAULIPAS:
-1. EMASurvey.js & EMASurvey.css
-2. HamiltonSurvey.js & HamiltonSurvey.css  
-3. ViolentometerSurvey.js & ViolentometerSurvey.css
-
-ENCUESTAS_TABASCO:
-1. Por implementar (3 encuestas)
-2. Por implementar
-3. Por implementar
-
-COMPONENTES_PAGES:
-- SurveyMenu.js & SurveyMenu.css (menú de selección de encuestas)
-- SurveyResults.js & SurveyResults.css (resultados de encuestas)
-- UserProfile.js & UserProfile.css (registro usuario → Firebase)
-- ContactForm.js (sin CSS)
-
-COMPONENTES_NAVEGACIÓN:
-- Header.js & Header.css (con selector de sedes)
+- Frontend: React 18.x
+- Routing: React Router DOM 6.x
+- Database: Firebase Realtime Database
+- Styling: CSS Modules
+- Build Tool: Create React App
+- Deployment: GitHub Pages
 
 FUNCIONALIDADES_ACTIVAS:
-- Selector de sedes Tamaulipas/Tabasco en Header
-- Sistema de 3 encuestas para Tamaulipas
-- Menú de navegación entre encuestas
-- Registro de usuarios en Firebase
-- Formulario de contacto
-- Página de resultados de encuestas
+- ✅ Selector de sedes con persistencia en localStorage
+- ✅ Detección automática de encuestas desde Firebase
+- ✅ Sistema modular de 4 encuestas implementadas
+- ✅ Registro de usuarios en Firebase
+- ✅ Página "Quiénes Somos" completa
+- ✅ Aviso de privacidad
+- ✅ Diseño responsivo
+- ✅ Gestión de encuestas por sede vía Firebase
 
-FUNCIONALIDADES_PENDIENTES:
-- Implementar 3 encuestas para Tabasco
-- Integrar sedes con datos específicos
-- Conectar encuestas con Firebase por sede
-- Diferenciar resultados por sede
+CONTACTOS_INSTITUCIONALES:
+- Email: contacto@ayudandolesatriunfar.org
+- Teléfono: (834) 123-4567
+- Dirección: Av. Principal #123, Ciudad, Tamaulipas
 
-ÚLTIMOS_CAMBIOS:
-- Implementado selector de sedes en Header
-- Configuración Firebase completa
-- 3 encuestas implementadas para Tamaulipas
+PRÓXIMOS_DESARROLLOS:
+- [ ] Panel administrativo para gestión de encuestas
+- [ ] Sistema de autenticación y roles
+- [ ] Dashboard de resultados y analytics
+- [ ] Exportación de reportes en PDF
+- [ ] API REST para integraciones externas
+- [ ] Notificaciones y recordatorios
 
-PRÓXIMOS_PASOS:
-- [ ] Implementar 3 encuestas para Tabasco
-- [ ] Conectar encuestas con Firebase por sede
-- [ ] Diferenciar visualización por sede
-- [ ] Mejorar responsive design
-- [ ] Agregar autenticación de usuarios
-
-ESTURCTURA_DB_FIREBASE_PARA_RESULTADOS
-- resources/
-  ├── hospitals/
-  │    ├── hospital1: {nombre, direccion, telefono, especialidad, ubicacion}
-  │    └── hospital2: {...}
-  ├── professionals/
-  │    ├── prof1: {nombre, especialidad, contacto, tipo}
-  │    └── prof2: {...}
-  └── recommendations/
-       ├── by_score/
-       │    ├── hamilton_0_10: "Recomendaciones para puntaje bajo"
-       │    ├── hamilton_11_20: "Recomendaciones para puntaje medio"
-       │    └── hamilton_21_50: "Recomendaciones para puntaje alto"
-       └── by_topic/
-            ├── anxiety: "Recursos para ansiedad"
-            ├── depression: "Recursos para depresión"
-            └── violence: "Recursos para violencia"
-
-
-ÚLTIMOS_CAMBIOS:
-- ✅ Implementado selector de sedes en Header con persistencia
-- ✅ Configuración Firebase completa con estructura por sede
-- ✅ 4 encuestas implementadas para Tamaulipas o Tabasco
-- ✅ Sistema INTELIGENTE para Tabasco: muestra solo encuestas existentes en Firebase
-- ✅ Mapeo de nombres de encuestas con/sin acentos en SurveyMenu
-
-PRÓXIMOS_PASOS:
-- [ ] Agregar más encuestas para Tabasco en Firebase (se mostrarán automáticamente)
-- [ ] Conectar completamente encuestas con Firebase por sede
-- [ ] Diferenciar visualización de resultados por sede
-- [ ] Mejorar responsive design
-- [ ] Agregar autenticación de usuarios
-
-NOTAS_IMPORTANTES_TABASCO:
-- Para Tabasco: LAS ENCUESTAS SE MUESTRAN SOLO SI ESTÁN EN FIREBASE
-- No hay encuestas "por defecto" para Tabasco
-- Al agregar cualquier encuesta en Firebase/sedes/tabasco/Encuestas/, se mostrará automáticamente
-- El sistema es escalable: nuevas encuestas se detectan automáticamente
+VERSION_ACTUAL: v2.0
+ESTADO: ✅ Production Ready
+ÚLTIMA_ACTUALIZACIÓN: [Fecha actual]

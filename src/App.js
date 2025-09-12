@@ -74,8 +74,11 @@ import EMASurvey from './components/EMASurvey';
 import ViolentometerSurvey from './components/ViolentometerSurvey'; 
 import SocioeconomicoSurvey from './components/SocioeconomicoSurvey';
 import UserProfile from './components/UserProfile';
+import QuienesSomos from './components/QuienesSomos';
+import AvisoPrivacidad from './components/AvisoPrivacidad';
 import { database } from './config/firebase';
 import './App.css';
+import Eventos from './components/Eventos';
 
 // Página de inicio
 function HomePage() {
@@ -113,6 +116,9 @@ function App() {
           />
           
           <Route path="/perfil" element={<UserProfile db={database} />} />
+           <Route path="/quienes-somos" element={<QuienesSomos />} />
+          <Route path="/aviso-privacidad" element={<AvisoPrivacidad />} />
+          <Route path="/eventos" element={<Eventos />} />
           <Route path="/encuesta/hamilton" element={<HamiltonSurvey db={database} />} />
           <Route path="/encuesta/ema" element={<EMASurvey db={database} />} />
           <Route path="/encuesta/violentometro" element={<ViolentometerSurvey db={database} />} />
