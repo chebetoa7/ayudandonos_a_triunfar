@@ -402,12 +402,21 @@ const SurveyMenu = () => {
         available: true,
         sede: currentSede
       },
-      'socioeconomico': { // ← Sin acento para la búsqueda
+      'socioeconomico': { 
         id: 'socioeconomico',
         title: 'Cuestionario Socioeconómico',
         description: 'Evaluación de condiciones socioeconómicas familiares',
         icon: '🏠',
         time: '10 min',
+        available: true,
+        sede: currentSede
+      },
+      'violentometro': { 
+        id: 'violentometro',
+        title: 'Cuestionario del Violentómetro',
+        description: 'Evaluación de situaciones de violencia',
+        icon: '📊',
+        time: '15 min',
         available: true,
         sede: currentSede
       }
@@ -445,6 +454,15 @@ const SurveyMenu = () => {
         description: 'Evaluación de condiciones socioeconómicas familiares',
         icon: '🏠',
         time: '10 min',
+        available: true,
+        sede: currentSede
+      },
+      {
+        id: 'violentometro',
+        title: 'Cuestionario del Violentómetro',
+        description: 'Evaluación de situaciones de violencia',
+        icon: '📊',
+        time: '15 min',
         available: true,
         sede: currentSede
       }

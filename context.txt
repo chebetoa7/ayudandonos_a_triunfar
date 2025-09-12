@@ -85,3 +85,24 @@ ESTURCTURA_DB_FIREBASE_PARA_RESULTADOS
             ├── anxiety: "Recursos para ansiedad"
             ├── depression: "Recursos para depresión"
             └── violence: "Recursos para violencia"
+
+
+ÚLTIMOS_CAMBIOS:
+- ✅ Implementado selector de sedes en Header con persistencia
+- ✅ Configuración Firebase completa con estructura por sede
+- ✅ 4 encuestas implementadas para Tamaulipas o Tabasco
+- ✅ Sistema INTELIGENTE para Tabasco: muestra solo encuestas existentes en Firebase
+- ✅ Mapeo de nombres de encuestas con/sin acentos en SurveyMenu
+
+PRÓXIMOS_PASOS:
+- [ ] Agregar más encuestas para Tabasco en Firebase (se mostrarán automáticamente)
+- [ ] Conectar completamente encuestas con Firebase por sede
+- [ ] Diferenciar visualización de resultados por sede
+- [ ] Mejorar responsive design
+- [ ] Agregar autenticación de usuarios
+
+NOTAS_IMPORTANTES_TABASCO:
+- Para Tabasco: LAS ENCUESTAS SE MUESTRAN SOLO SI ESTÁN EN FIREBASE
+- No hay encuestas "por defecto" para Tabasco
+- Al agregar cualquier encuesta en Firebase/sedes/tabasco/Encuestas/, se mostrará automáticamente
+- El sistema es escalable: nuevas encuestas se detectan automáticamente
