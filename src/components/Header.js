@@ -13,11 +13,15 @@ const Header = () => {
     console.log(`Sede cambiada a: ${sede}`);
   };*/
   const handleSedeChange = (sede) => {
-  setSelectedSede(sede);
-  localStorage.setItem('selectedSede', sede);
-  
-  // Disparar evento storage para notificar a otros componentes
-  window.dispatchEvent(new Event('storage'));
+    // Asegurar que sea minúsculas
+    //const sedeMinusculas = sede.toLowerCase();
+    setSelectedSede(sede);
+    localStorage.setItem('selectedSede', sede);
+    
+    // Disparar evento personalizado para notificar el cambio
+    window.dispatchEvent(new CustomEvent('sedeChanged', { 
+      detail: { sede: sede } 
+    }));
   
   console.log(`Sede cambiada a: ${sede}`);
 };

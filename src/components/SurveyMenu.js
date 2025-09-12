@@ -291,6 +291,7 @@ export default SurveyMenu;*/
 
 
 // src/components/SurveyMenu.js
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
@@ -300,21 +301,34 @@ import './SurveyMenu.css';
 const SurveyMenu = () => {
   const [surveys, setSurveys] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sede, setSede] = useState('tamaulipas');
+  const [sede, setSede] = useState('Tamaulipas');
   const [firebaseError, setFirebaseError] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const loadSedeAndSurveys = () => {
-      const savedSede = localStorage.getItem('selectedSede') || 'tamaulipas';
+      const savedSede = localStorage.getItem('selectedSede') || 'Tamaulipas';
       setSede(savedSede);
       loadSurveys(savedSede);
+      // Escuchar cambios de sede desde el Header
+      const handleSedeChange = (event) => {
+        if (event.detail && event.detail.sede) {
+          console.log('Sede cambiada desde Header:', event.detail.sede);
+          setSede(event.detail.sede);
+          loadSurveys(event.detail.sede);
+        }
+      };
+      window.addEventListener('sedeChanged', handleSedeChange);
+      return () => {
+        window.removeEventListener('sedeChanged', handleSedeChange);
+      };
     };
 
     loadSedeAndSurveys();
   }, []);
 
   const loadSurveys = (currentSede) => {
+     setLoading(true);
     if (!database) {
       console.warn('Firebase no disponible, usando encuestas por defecto');
       setFirebaseError(true);
