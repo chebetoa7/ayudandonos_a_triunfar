@@ -225,3 +225,94 @@ PRÓXIMOS_DESARROLLOS:
 VERSION_ACTUAL: v2.0
 ESTADO: ✅ Production Ready
 ÚLTIMA_ACTUALIZACIÓN: [Fecha actual]
+
+EVENTOS_SISTEMA:
+- ✅ Implementado sistema completo de eventos
+- ✅ Página: /eventos 
+- ✅ Componente: Eventos.js & Eventos.css
+- ✅ Integración con Firebase Realtime Database
+- ✅ Filtrado automático por sede (Tamaulipas/Tabasco)
+- ✅ Diseño responsivo con cards
+- ✅ Badges de sede en cada evento
+- ✅ Manejo de imágenes múltiples
+- ✅ Mensajes personalizados cuando no hay eventos
+
+ESTRUCTURA_FIREBASE_EVENTOS:
+- eventos/
+  └── evento_id/
+       ├── titulo: "string" (requerido)
+       ├── descripcion: "string" (requerido)
+       ├── fecha: "ISO_string" (requerido)
+       ├── lugar: "string"
+       ├── sede: "string" (Tamaulipas/Tabasco/Todas)
+       ├── imagenes: ["url1", "url2", ...]
+       ├── activo: boolean (true/false)
+       └── creado: "ISO_string" (timestamp)
+
+FILTRADO_EVENTOS:
+- Tamaulipas: Muestra eventos con sede "Tamaulipas" + eventos sin sede + "Todas"
+- Tabasco: Muestra eventos con sede "Tabasco" + "Todas"
+- Sin sede: Solo se muestran en Tamaulipas (por defecto)
+- Todas: Se muestran en todas las sedes
+
+FUNCIONALIDADES_EVENTOS:
+- ✅ Detección automática de eventos desde Firebase
+- ✅ Filtrado en tiempo real por sede seleccionada
+- ✅ Ordenamiento por fecha (más recientes primero)
+- ✅ Badges visuales de color por sede
+- ✅ Manejo de errores de imágenes
+- ✅ Mensajes contextuales cuando no hay eventos
+- ✅ Sincronización con selector de sede del Header
+- ✅ Responsive design para móviles y desktop
+
+COLORES_BADGES_SEDE:
+- Tamaulipas: #2c5aa0 (azul institucional)
+- Tabasco: #e63946 (rojo acento) 
+- Todas: #f8c537 (amarillo)
+- General: #6c757d (gris)
+
+MENU_NAVEGACION_ACTUALIZADO:
+- Inicio → /
+- Quiénes Somos → /quienes-somos  
+- Eventos → /eventos ← NUEVO
+- Encuestas → /encuestas
+- Mi Perfil → /perfil
+
+DEPENDENCIAS_ACTUALIZADAS:
+- ✅ Firebase Realtime Database (ya existente)
+- ✅ React Router DOM (ya existente)
+- ✅ CSS Modules (ya existente)
+- ✅ Íconos emoji nativos (sin dependencias externas)
+
+ESTADO_ACTUAL_EVENTOS:
+- ✅ Sistema implementado y funcionando
+- ✅ 1 evento de prueba para Tamaulipas en Firebase
+- ✅ 0 eventos para Tabasco (muestra mensaje apropiado)
+- ✅ Filtrado por sede funcionando correctamente
+- ✅ Integración completa con Header y selección de sede
+
+PRÓXIMOS_PASOS_EVENTOS:
+- [ ] Panel administrativo para agregar/editar eventos
+- [ ] Upload de imágenes a Firebase Storage
+- [ ] Sistema de categorías para eventos
+- [ ] Notificaciones para eventos próximos
+- [ ] Calendar view alternativo
+- [ ] Exportación de lista de eventos
+
+EJEMPLO_EVENTO_FIREBASE:
+{
+  "titulo": "Campamento de Verano 2025",
+  "descripcion": "Actividades recreativas y educativas para niños...",
+  "fecha": "2025-12-15T10:00:00",
+  "lugar": "Parque Central, Ciudad",
+  "sede": "Tamaulipas",
+  "imagenes": ["https://ejemplo.com/foto1.jpg", "https://ejemplo.com/foto2.jpg"],
+  "activo": true,
+  "creado": "2024-09-12T09:30:00"
+}
+
+NOTAS_IMPORTANTES:
+- Los eventos sin sede específica solo se muestran en Tamaulipas
+- Los eventos con sede "Todas" se muestran en ambas sedes
+- El sistema respeta completamente la selección del Header
+- No hay forzado de sede - la UI sigue la selección del usuario

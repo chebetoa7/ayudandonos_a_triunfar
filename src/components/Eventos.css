@@ -7,6 +7,171 @@
 
 .eventos-header {
   text-align: center;
+  margin-bottom: 30px;
+}
+
+.eventos-header h1 {
+  color: #2c5aa0;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.eventos-header p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.sede-actual {
+  background: #2c5aa0;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.info-sede {
+  background: #e3f2fd;
+  padding: 10px;
+  border-radius: 8px;
+  border-left: 4px solid #2c5aa0;
+  margin: 20px 0 !important;
+  font-size: 0.9rem !important;
+}
+
+.eventos-info {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.eventos-info p {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.eventos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+/* ... (el resto del CSS anterior se mantiene igual) */
+
+.evento-sede-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.loading, .no-eventos {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.error-message {
+  background: #ffe6e6;
+  color: #d32f2f;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 20px 0;
+  border-left: 4px solid #d32f2f;
+}
+
+.no-eventos h3 {
+  color: #2c5aa0;
+  margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .eventos-container {
+    padding: 60px 0;
+  }
+  
+  .eventos-header h1 {
+    font-size: 2rem;
+  }
+  
+  .eventos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .evento-card {
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .eventos-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .evento-sede-badge {
+    top: 10px;
+    right: 10px;
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
+
+/* src/components/Eventos.css - Agrega estos estilos */
+.no-eventos {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.no-eventos h3 {
+  color: #2c5aa0;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.no-eventos p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.info-adicional {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.info-adicional p {
+  margin: 0;
+  color: #856404;
+  font-size: 0.9rem;
+}
+
+/* src/components/Eventos.css */
+.eventos-container {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+.eventos-header {
+  text-align: center;
   margin-bottom: 50px;
 }
 
